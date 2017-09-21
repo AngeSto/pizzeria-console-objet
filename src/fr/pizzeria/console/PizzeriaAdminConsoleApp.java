@@ -40,7 +40,7 @@ public class PizzeriaAdminConsoleApp {
 				String code = question.nextLine();
 				System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
 				String nom = question.nextLine();
-				System.out.println("Veuillez saisir le prix de la pizza");
+				System.out.println("Veuillez saisir le prix de la pizza (utilisez une virgule pour les centimes)");
 				double prix = question.nextDouble();
 				//Création d'un nouveau tableau avec une longueur +1
 				Pizza[] newpizzas = new Pizza[pizzas.length + 1];
@@ -68,7 +68,7 @@ public class PizzeriaAdminConsoleApp {
 						code = question.nextLine();
 						System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
 						nom = question.nextLine();
-						System.out.println("Veuillez saisir le prix de la pizza");
+						System.out.println("Veuillez saisir le prix de la pizza (utilisez une virgule pour les centimes)");
 						prix = question.nextDouble();
 						//Utilise setCode pour modifier la pizza
 						i.setCode(code);
