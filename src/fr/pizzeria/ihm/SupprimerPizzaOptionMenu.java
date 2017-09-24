@@ -3,6 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import dao.PizzaDaompl;
+import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
@@ -12,13 +13,11 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		super(dao);
 	}
 	
-	public void execute(Scanner question) {
+	public void execute(Scanner question) throws DeletePizzaException {
 		// TODO Auto-generated method stub
 		
 		for (Pizza i : dao.findAllPizzas()) {
-			if (i != null){
-				System.out.println(i);
-			}
+			System.out.println(i);
 			
 		}
 		System.out.println("\nVeuillez choisir la pizza à supprimer \n(99 pour abandonner)");
@@ -26,9 +25,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		if (codePizza.equals("99")) {
 			return;
 		}
-
 		dao.deletePizza(codePizza);
-		
 		System.out.println("\nPizza "+codePizza+" supprimée");
 	}
 

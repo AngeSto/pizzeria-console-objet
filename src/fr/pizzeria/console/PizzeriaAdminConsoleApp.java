@@ -19,11 +19,14 @@ public class PizzeriaAdminConsoleApp {
 		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(dao);
 		SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(dao);
 		
+		
 		// TODO Auto-generated method stub	
 		//Annonce la variable "choix" avant do while sinon erreur
 		String choix = "";
 		//Boucle do pour revenir au menu à chaque fois, seul moyen d'en sortir est d'écrire 99 (dans condition while), do while pour que la boucle s'effectue au moins une fois
+		
 		do {
+			try{
 			System.out.println("\n*****Pizzeria Administration*****"+lister.getLibelle()+ajouter.getLibelle()+modifier.getLibelle()+supprimer.getLibelle()+"\n 99. Sortir");
 			Scanner question = new Scanner(System.in).useLocale(Locale.US);
 			choix = question.nextLine();
@@ -50,6 +53,11 @@ public class PizzeriaAdminConsoleApp {
 			default:
 				System.out.println("Veuillez rentrer une valeur correct");
 			}
+			} catch (Exception e) {
+				e.getMessage();
+				e.printStackTrace();
+			}
+			
 		} while (!choix.equals("99"));
 
 	}

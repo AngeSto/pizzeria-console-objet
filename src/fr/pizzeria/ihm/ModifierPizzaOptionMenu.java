@@ -3,6 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import dao.PizzaDaompl;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
@@ -11,14 +12,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		super(dao);
 	}
 
-	public void execute(Scanner question) {
+	public void execute(Scanner question) throws UpdatePizzaException {
 		// TODO Auto-generated method stub
 		
 		for (Pizza i : dao.findAllPizzas()) {
-			if (i != null){
-				System.out.println(i);
-			}
-			
+			System.out.println(i);
+				
 		}
 		System.out.println("\nVeuillez choisir la pizza à modifier \n(99 pour abandonner)");
 		String codeAModifier = question.nextLine();
@@ -40,6 +39,8 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				
 				
 				System.out.println("\nPizza "+codeAModifier+" modifiée");
+			} else {throw new UpdatePizzaException("Veuillez écrire un code pizza existant");
+				
 			}
 		}
 	}
