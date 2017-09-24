@@ -28,7 +28,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		//Cherche la pizza avec le code de référence entré, utilise getCode pour trouver la pizza référencée
 
 		for (Pizza i : dao.findAllPizzas()) {
-			if (i != null && i.getCode().equals(codeAModifier)) {
+			if (i.getCode().equals(codeAModifier)) {
 				System.out.println("Veuillez saisir le code de la pizza");
 				String code = question.nextLine();
 				System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");

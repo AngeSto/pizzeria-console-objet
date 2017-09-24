@@ -8,7 +8,7 @@ public class PizzaDaompl implements IPizzaDao {
 
 	public PizzaDaompl() {
 		// Création de la carte à pizza selon un tableau
-		pizzas = new Pizza[50];
+		pizzas = new Pizza[8];
 		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
 		pizzas[2] = new Pizza("REIN", "La Reine", 11.50);
@@ -26,13 +26,15 @@ public class PizzaDaompl implements IPizzaDao {
 
 	@Override
 	public boolean saveNewPizza(String code, String nom, Double prix) {
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] == null) {
-				pizzas[i] = new Pizza(code, nom, prix);
-				break;
-			}
-
-		}
+		Pizza[] newpizzas = new Pizza[pizzas.length + 1];
+		 	//Recopie les valeurs de l'ancien tableau dans le nouveau
+		 	for (int i = 0; i < pizzas.length; i++) {
+		 		newpizzas[i] = pizzas[i];
+		 	}
+		 	//Ajout de la nouvelle pizza puis reviens aligne l'ancien tableau sur le nouveau
+		 	newpizzas[newpizzas.length - 1] = new Pizza(code, nom, prix);
+		 	pizzas = newpizzas;
+			
 		return false;
 	}
 
@@ -41,16 +43,30 @@ public class PizzaDaompl implements IPizzaDao {
 		// Cherche la pizza référencée avec getCode, puis crée un tableau de
 		// longueur -1
 		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null && pizzas[i].getCode().equals(codePizza)) {
-				pizzas[i] = null;
-			}
-		}
+			 					if (pizzas[i].getCode().equals(codePizza)) {
+			 						Pizza[] jpizzas = new Pizza[pizzas.length - 1];
+			 						for (int j = 0; j < pizzas.length-1; j++) { // L'idée ici est de décaler les pizzas en dessous de la pizza séléctionner de 1 vers le haut du tableau
+			 							if (i > j) { // Pour les pizzas en dessous de la pizza sélectionnée
+			 								jpizzas[j] = pizzas[j];
+			 								jpizzas[j] = pizzas[j];
+			 								jpizzas[j] = pizzas[j];
+			 							} else { // Pour la pizza séléctionnée et les pizzas au dessus
+			 									jpizzas[j] = pizzas[j + 1];
+			 									jpizzas[j] = pizzas[j + 1];
+			 									jpizzas[j] = pizzas[j + 1];
+			 							}
+			 
+			 						}
+			 						pizzas = jpizzas;
+			 						
+			 					}
+			 				}
 		return false;
 	}
 
 	public boolean updatePizza(String codeAModifier, String code, String nom, Double prix) {
 		for (Pizza i : pizzas) {
-			if (i != null && i.getCode().equals(codeAModifier)) {
+			if (i.getCode().equals(codeAModifier)) {
 				i.setCode(code);
 				i.setNom(nom);
 				i.setPrix(prix);

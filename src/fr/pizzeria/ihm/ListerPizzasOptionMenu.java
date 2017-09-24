@@ -17,9 +17,8 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 		// TODO Auto-generated method stub
 		//Affiche la carte
 		for (Pizza i : dao.findAllPizzas()) {
-			if (i != null){
 				System.out.println(i);
-			}
+			
 			
 		}
 
