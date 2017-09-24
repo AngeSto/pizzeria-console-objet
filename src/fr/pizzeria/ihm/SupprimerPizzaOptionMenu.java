@@ -25,6 +25,9 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		if (codePizza.equals("99")) {
 			return;
 		}
+		if (codePizza.length()<3){
+			throw new DeletePizzaException("Le code pizza doit être d'au moins 3 caractères");
+		}
 		dao.deletePizza(codePizza);
 		System.out.println("\nPizza "+codePizza+" supprimée");
 	}

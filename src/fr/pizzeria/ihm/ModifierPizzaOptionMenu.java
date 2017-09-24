@@ -30,6 +30,9 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			if (i.getCode().equals(codeAModifier)) {
 				System.out.println("Veuillez saisir le code de la pizza");
 				String code = question.nextLine();
+				if (code.length()<3){
+					throw new UpdatePizzaException("Le code pizza doit être d'au moins 3 caractères");
+				}
 				System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
 				String nom = question.nextLine();
 				System.out.println("Veuillez saisir le prix de la pizza");
