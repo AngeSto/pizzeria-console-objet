@@ -8,10 +8,10 @@ import fr.pizzeria.model.Pizza;
 public class ListerPizzasOptionMenu extends OptionMenu {
 
 	
-
 	public ListerPizzasOptionMenu(PizzaDaompl dao) {
-		this.dao = dao;
+		super(dao);
 	}
+
 
 	public void execute(Scanner question) {
 		// TODO Auto-generated method stub
@@ -22,6 +22,13 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 			
 		}
 
+	}
+
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "\n 1. Lister les pizzas";
 	}
 
 

@@ -10,8 +10,9 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	Pizza[] pizzas;
 	public AjouterPizzaOptionMenu (PizzaDaompl dao) {
-		this.dao = dao;
+		super(dao);
 	}
+	
 	
 	
 	public void execute(Scanner question) {
@@ -22,11 +23,21 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		String code = question.nextLine();
 		System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
 		String nom = question.nextLine();
-		System.out.println("Veuillez saisir le prix de la pizza (utilisez une virgule pour les centimes)");
+		System.out.println("Veuillez saisir le prix de la pizza");
 		double prix = question.nextDouble();
 		
 		dao.saveNewPizza(code, nom, prix);
 		
+		System.out.println("\nPizza "+code+" ajoutée");
+		
+	}
+
+
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "\n 2. Ajouter une nouvelle pizza";
 	}
 
 }

@@ -8,7 +8,7 @@ import fr.pizzeria.model.Pizza;
 public class ModifierPizzaOptionMenu extends OptionMenu {
 	
 	public ModifierPizzaOptionMenu (PizzaDaompl dao) {
-		this.dao = dao;
+		super(dao);
 	}
 
 	public void execute(Scanner question) {
@@ -33,15 +33,21 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				String code = question.nextLine();
 				System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
 				String nom = question.nextLine();
-				System.out.println("Veuillez saisir le prix de la pizza (utilisez une virgule pour les centimes)");
+				System.out.println("Veuillez saisir le prix de la pizza");
 				Double prix = question.nextDouble();
 				
 				dao.updatePizza(codeAModifier, code, nom, prix);
 				
 				
-				System.out.println("\nListe des pizzas modifier");
+				System.out.println("\nPizza "+codeAModifier+" modifiée");
 			}
 		}
+	}
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "\n 3. Mettre à jour une pizza";
 	}
 
 }

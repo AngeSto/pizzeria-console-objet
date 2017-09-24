@@ -1,5 +1,6 @@
 package fr.pizzeria.console;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 import dao.PizzaDaompl;
@@ -7,29 +8,25 @@ import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
-import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		
 		PizzaDaompl dao = new PizzaDaompl();
+		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(dao);
+		AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(dao);
+		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(dao);
+		SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(dao);
 		
 		// TODO Auto-generated method stub	
 		//Annonce la variable "choix" avant do while sinon erreur
 		String choix = "";
 		//Boucle do pour revenir au menu à chaque fois, seul moyen d'en sortir est d'écrire 99 (dans condition while), do while pour que la boucle s'effectue au moins une fois
 		do {
-			System.out.println(
-					"\n*****Pizzeria Administration***** \n 1. Lister les pizzas \n 2. Ajouter une nouvelle pizza \n 3. Mettre à jour une pizza \n 4. Supprimer une pizza \n 99. Sortir");
-			Scanner question = new Scanner(System.in);
+			System.out.println("\n*****Pizzeria Administration*****"+lister.getLibelle()+ajouter.getLibelle()+modifier.getLibelle()+supprimer.getLibelle()+"\n 99. Sortir");
+			Scanner question = new Scanner(System.in).useLocale(Locale.US);
 			choix = question.nextLine();
-			
-			ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(dao);
-			AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(dao);
-			ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(dao);
-			SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(dao);
-			
 			//Utilisation d'un switch pour eviter le cumul de if else, et pour avoir le default si on écrit autre chose que demandé
 			switch (choix) {
 			case "1": 

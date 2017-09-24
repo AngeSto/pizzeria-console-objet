@@ -9,7 +9,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	Pizza[] pizzas;
 	public SupprimerPizzaOptionMenu (PizzaDaompl dao) {
-		this.dao = dao;
+		super(dao);
 	}
 	
 	public void execute(Scanner question) {
@@ -28,6 +28,14 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		}
 
 		dao.deletePizza(codePizza);
+		
+		System.out.println("\nPizza "+codePizza+" supprimée");
+	}
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "\n 4. Supprimer une pizza";
 	}
 
 }
