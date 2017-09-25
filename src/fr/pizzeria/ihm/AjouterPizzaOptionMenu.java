@@ -1,22 +1,25 @@
 package fr.pizzeria.ihm;
 
+import java.awt.image.SampleModel;
 import java.util.Scanner;
 
-import dao.PizzaDaompl;
+import dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
 	
 
 	Pizza[] pizzas;
-	public AjouterPizzaOptionMenu (PizzaDaompl dao) {
+	public AjouterPizzaOptionMenu (IPizzaDao dao) {
 		super(dao);
 	}
 	
 	
 	
-	public void execute(Scanner question) throws SavePizzaException {
+	public void execute(Scanner question) throws SavePizzaException, StockageException {
 		// TODO Auto-generated method stub
 		
 		//Demande les informations pour la nouvelle pizza
@@ -28,9 +31,15 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
 		String nom = question.nextLine();
 		System.out.println("Veuillez saisir le prix de la pizza");
-		double prix = question.nextDouble();
+		String prixStr = question.nextLine();
+		double prix = Double.parseDouble(prixStr);
+		System.out.println("Veuillez choisir une catégorie (Viande, Sans Viande ou Poisson)");
+		String scategorie = question.nextLine();
+		CategoriePizza returncategorie = CategoriePizza.sameLibelle(scategorie);
+		 
 		
-		dao.saveNewPizza(code, nom, prix);
+		
+		dao.saveNewPizza(code, nom, prix, returncategorie);
 		
 		System.out.println("\nPizza "+code+" ajoutée");
 		

@@ -3,6 +3,7 @@ package fr.pizzeria.console;
 import java.util.Locale;
 import java.util.Scanner;
 
+import dao.IPizzaDao;
 import dao.PizzaDaompl;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
@@ -13,7 +14,7 @@ public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		
-		PizzaDaompl dao = new PizzaDaompl();
+		IPizzaDao dao = new PizzaDaompl();
 		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(dao);
 		AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(dao);
 		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(dao);

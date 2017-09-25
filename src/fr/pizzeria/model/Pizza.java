@@ -8,19 +8,21 @@ Integer id;
 String code;
 String nom;
 double prix;
+CategoriePizza categorie;
 
 public static Scanner question = new Scanner(System.in);
 
-public Pizza(String code, String nom, double prix) {
+public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 	super();
 	this.code = code;
 	this.nom = nom;
 	this.prix = prix;
+	this.categorie = categorie;
 }
 
 @Override
 public String toString() {
-	return code+" -> "+nom+" ("+prix+"€)" ;
+	return code+" -> "+nom+" ("+prix+"€) "+categorie;
 }
 
 /**
@@ -64,5 +66,21 @@ public double getPrix() {
 public void setPrix(double prix) {
 	this.prix = prix;
 }
+
+/**
+ * @return the categorie
+ */
+public CategoriePizza getCategorie() {
+	return categorie;
+}
+
+/**
+ * @param categorie the categorie to set
+ */
+public void setCategorie(CategoriePizza categorie) {
+	this.categorie = categorie;
+}
+
+
 
 }

@@ -2,13 +2,13 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import dao.PizzaDaompl;
+import dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasOptionMenu extends OptionMenu {
 
 	
-	public ListerPizzasOptionMenu(PizzaDaompl dao) {
+	public ListerPizzasOptionMenu(IPizzaDao dao) {
 		super(dao);
 	}
 

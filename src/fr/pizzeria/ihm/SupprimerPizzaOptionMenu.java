@@ -2,14 +2,14 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import dao.PizzaDaompl;
+import dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	Pizza[] pizzas;
-	public SupprimerPizzaOptionMenu (PizzaDaompl dao) {
+	public SupprimerPizzaOptionMenu (IPizzaDao dao) {
 		super(dao);
 	}
 	
@@ -30,7 +30,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		}
 		dao.deletePizza(codePizza, trouve);
 		if (trouve == false){
-			throw new DeletePizzaException("Pizza à supprimer inexistant, veuillez écrire une pizza existante");
+
 		} 
 			else {
 				System.out.println("\nPizza "+codePizza+" supprimée");
