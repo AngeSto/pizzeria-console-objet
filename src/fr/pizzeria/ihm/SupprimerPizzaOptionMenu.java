@@ -15,7 +15,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	
 	public void execute(Scanner question) throws DeletePizzaException {
 		// TODO Auto-generated method stub
-		
+		boolean trouve = false;
 		for (Pizza i : dao.findAllPizzas()) {
 			System.out.println(i);
 			
@@ -28,8 +28,14 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		if (codePizza.length()<3){
 			throw new DeletePizzaException("Le code pizza doit être d'au moins 3 caractères");
 		}
-		dao.deletePizza(codePizza);
-		System.out.println("\nPizza "+codePizza+" supprimée");
+		dao.deletePizza(codePizza, trouve);
+		if (trouve == false){
+			throw new DeletePizzaException("Pizza à supprimer inexistant, veuillez écrire une pizza existante");
+		} 
+			else {
+				System.out.println("\nPizza "+codePizza+" supprimée");
+		}
+		
 	}
 
 	@Override

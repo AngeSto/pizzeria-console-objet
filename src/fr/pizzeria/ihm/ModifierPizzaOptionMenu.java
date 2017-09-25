@@ -14,7 +14,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	public void execute(Scanner question) throws UpdatePizzaException {
 		// TODO Auto-generated method stub
-		
+		boolean trouve = false;
 		for (Pizza i : dao.findAllPizzas()) {
 			System.out.println(i);
 				
@@ -25,9 +25,10 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			return;
 		}
 		//Cherche la pizza avec le code de référence entré, utilise getCode pour trouver la pizza référencée
-
+		
 		for (Pizza i : dao.findAllPizzas()) {
 			if (i.getCode().equals(codeAModifier)) {
+				trouve = true;
 				System.out.println("Veuillez saisir le code de la pizza");
 				String code = question.nextLine();
 				if (code.length()<3){
@@ -42,9 +43,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				
 				
 				System.out.println("\nPizza "+codeAModifier+" modifiée");
-			} else {throw new UpdatePizzaException("Veuillez écrire un code pizza existant");
-				
 			}
+				
+			
+		}
+		if (trouve == false){
+			throw new UpdatePizzaException("Pizza à modifier inexistant, veuillez écrire une pizza existante");
 		}
 	}
 
