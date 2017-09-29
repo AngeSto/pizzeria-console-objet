@@ -12,7 +12,7 @@ import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
 
 public class PizzeriaAdminConsoleApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
 		
 		IPizzaDao dao = new PizzaDaompl();
 		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(dao);
