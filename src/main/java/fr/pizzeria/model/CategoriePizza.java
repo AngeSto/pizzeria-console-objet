@@ -1,6 +1,5 @@
 package fr.pizzeria.model;
 
-import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
 
 public enum CategoriePizza {

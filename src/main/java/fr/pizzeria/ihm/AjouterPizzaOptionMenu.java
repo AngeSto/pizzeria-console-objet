@@ -1,6 +1,5 @@
 package fr.pizzeria.ihm;
 
-import java.awt.image.SampleModel;
 import java.util.Scanner;
 
 import dao.IPizzaDao;

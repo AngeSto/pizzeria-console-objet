@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaompl implements IPizzaDao {
-	
+
 	List<Pizza> listpizzas = new ArrayList<Pizza>();
 
 	public PizzaDaompl() {
@@ -22,13 +24,12 @@ public class PizzaDaompl implements IPizzaDao {
 		pizzas[5] = new Pizza("SAV", "La Savoyarde", 13.00, CategoriePizza.VIANDE);
 		pizzas[6] = new Pizza("ORI", "L'Orientale", 13.50, CategoriePizza.VIANDE);
 		pizzas[7] = new Pizza("IND", "L'Indienne", 14.00, CategoriePizza.VIANDE);
-		
 
-		for (int i = 0; i < pizzas.length; i++){
+		for (int i = 0; i < pizzas.length; i++) {
 			listpizzas.add(pizzas[i]);
 		}
 	}
-	
+
 	@Override
 	public List<Pizza> findAllPizzas() {
 		return listpizzas;
@@ -36,48 +37,55 @@ public class PizzaDaompl implements IPizzaDao {
 
 	@Override
 	public boolean saveNewPizza(String code, String nom, Double prix, CategoriePizza returncategorie) {
-		Pizza newpizza = new Pizza (code,nom,prix, returncategorie);
+		Pizza newpizza = new Pizza(code, nom, prix, returncategorie);
 		listpizzas.add(newpizza);
-			
+
 		return false;
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza, boolean trouve) {
-		
+	public boolean deletePizza(String codePizza) throws DeletePizzaException {
+		boolean trouve = false;
 		Iterator<Pizza> iterator = listpizzas.iterator();
-		while (iterator.hasNext()){
-			
+		while (iterator.hasNext()) {
+
 			Pizza pizza = (Pizza) iterator.next();
-			if(pizza.getCode().equals(codePizza)){
+			if (pizza.getCode().equals(codePizza)) {
 				trouve = true;
 				iterator.remove();
 			}
-			
-		}
 
+		}
+		if (trouve == false) {
+			throw new DeletePizzaException("Pizza à modifier inexistant, veuillez écrire une pizza existante");
+		}
 		return false;
 	}
 
-	public boolean updatePizza(String codeAModifier, String code, String nom, Double prix, CategoriePizza returncategorie) {
-		
+	public boolean updatePizza(String codeAModifier, String code, String nom, Double prix,
+			CategoriePizza returncategorie) throws UpdatePizzaException {
+
 		Iterator<Pizza> iterator = listpizzas.iterator();
-		while (iterator.hasNext()){
-			
+		boolean trouve = false;
+		while (iterator.hasNext()) {
 			Pizza pizza = (Pizza) iterator.next();
-			if(pizza.getCode().equals(codeAModifier)){
+			if (pizza.getCode().equals(codeAModifier)) {
+				trouve = true;
 				pizza.setCode(code);
 				pizza.setNom(nom);
 				pizza.setPrix(prix);
 				pizza.setCategorie(returncategorie);
-				
+
 			}
-			
+
 		}
 
-		
+		if (trouve == false) {
+			throw new UpdatePizzaException("Pizza à modifier inexistant, veuillez écrire une pizza existante");
+		}
+
 		return false;
-		
+
 	}
 
 }
