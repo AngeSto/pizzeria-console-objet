@@ -23,7 +23,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		}
 		System.out.println("\nVeuillez choisir la pizza à modifier \n(99 pour abandonner)");
 		String codeAModifier = question.nextLine();
-		if (codeAModifier.equals("99")) {
+		if (("99").equals(codeAModifier)) {
 			return;
 		}
 		//Cherche la pizza avec le code de référence entré, utilise getCode pour trouver la pizza référencée

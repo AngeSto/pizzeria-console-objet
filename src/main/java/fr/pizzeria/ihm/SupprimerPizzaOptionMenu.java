@@ -23,7 +23,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		}
 		System.out.println("\nVeuillez choisir la pizza à supprimer \n(99 pour abandonner)");
 		String codePizza = question.nextLine();
-		if (codePizza.equals("99")) {
+		if (("99").equals(codePizza)) {
 			return;
 		}
 		if (codePizza.length() < 3) {

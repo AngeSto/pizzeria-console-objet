@@ -59,7 +59,7 @@ public class PizzeriaAdminConsoleApp {
 				e.printStackTrace();
 			}
 			
-		} while (!choix.equals("99"));
+		} while (!("99").equals(choix));
 
 	}
 
