@@ -31,36 +31,36 @@ public class PizzeriaAdminConsoleApp {
 			try {
 				System.out.println("\n*****Pizzeria Administration*****" + lister.getLibelle() + ajouter.getLibelle()
 						+ modifier.getLibelle() + supprimer.getLibelle() + "\n 99. Sortir");
-				try (Scanner question = new Scanner(System.in)) {
-					question.useLocale(Locale.US);
-					choix = question.nextLine();
-					// Utilisation d'un switch pour eviter le cumul de if else,
-					// et pour avoir le default si on écrit autre chose que
-					// demandé
-					switch (choix) {
-					case "1":
-						lister.execute(question);
-						break;
-					case "2":
-						ajouter.execute(question);
+				Scanner question = new Scanner(System.in);
+				question.useLocale(Locale.US);
+				choix = question.nextLine();
+				// Utilisation d'un switch pour eviter le cumul de if else,
+				// et pour avoir le default si on écrit autre chose que
+				// demandé
+				switch (choix) {
+				case "1":
+					lister.execute(question);
+					break;
+				case "2":
+					ajouter.execute(question);
 
-						break;
-					case "3":
-						modifier.execute(question);
-						break;
-					case "4":
-						supprimer.execute(question);
-						break;
-					case "99":
-						System.out.println("Aurevoir \u2639");// Comme écrit sur
-																// le TP
+					break;
+				case "3":
+					modifier.execute(question);
+					break;
+				case "4":
+					supprimer.execute(question);
+					break;
+				case "99":
+					System.out.println("Aurevoir \u2639");// Comme écrit sur
+															// le TP
 
-						break;
+					break;
 
-					default:
-						System.out.println("Veuillez rentrer une valeur correct");
-					}
+				default:
+					System.out.println("Veuillez rentrer une valeur correct");
 				}
+
 			} catch (Exception e) {
 				e.getMessage();
 				e.printStackTrace();
