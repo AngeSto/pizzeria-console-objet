@@ -11,7 +11,7 @@ import fr.pizza.model.Pizza;
 
 public class PizzaDaompl implements IPizzaDao {
 
-	List<Pizza> listpizzas = new ArrayList<Pizza>();
+	public List<Pizza> listpizzas = new ArrayList<>();
 
 	public PizzaDaompl() {
 		// Création de la carte à pizza selon un tableau
@@ -32,6 +32,7 @@ public class PizzaDaompl implements IPizzaDao {
 
 	@Override
 	public List<Pizza> findAllPizzas() {
+
 		return listpizzas;
 	}
 
@@ -49,7 +50,7 @@ public class PizzaDaompl implements IPizzaDao {
 		Iterator<Pizza> iterator = listpizzas.iterator();
 		while (iterator.hasNext()) {
 
-			Pizza pizza = (Pizza) iterator.next();
+			Pizza pizza = iterator.next();
 			if (pizza.getCode().equals(codePizza)) {
 				trouve = true;
 				iterator.remove();
@@ -68,7 +69,7 @@ public class PizzaDaompl implements IPizzaDao {
 		Iterator<Pizza> iterator = listpizzas.iterator();
 		boolean trouve = false;
 		while (iterator.hasNext()) {
-			Pizza pizza = (Pizza) iterator.next();
+			Pizza pizza = iterator.next();
 			if (pizza.getCode().equals(codeAModifier)) {
 				trouve = true;
 				pizza.setCode(code);

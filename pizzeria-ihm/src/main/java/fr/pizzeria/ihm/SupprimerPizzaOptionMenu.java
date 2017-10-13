@@ -2,12 +2,15 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizza.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
-
+	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
 	Pizza[] pizzas;
 
 	public SupprimerPizzaOptionMenu(IPizzaDao dao) {
@@ -15,12 +18,8 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	}
 
 	public void execute(Scanner question) throws DeletePizzaException {
-		// TODO Auto-generated method stub
-		for (Pizza i : dao.findAllPizzas()) {
-			System.out.println(i);
-
-		}
-		System.out.println("\nVeuillez choisir la pizza à supprimer \n(99 pour abandonner)");
+		afficherAllPizzas();
+		LOG.info("\nVeuillez choisir la pizza à supprimer \n(99 pour abandonner)");
 		String codePizza = question.nextLine();
 		if (("99").equals(codePizza)) {
 			return;
@@ -30,13 +29,12 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		}
 		dao.deletePizza(codePizza);
 
-		System.out.println("\nPizza " + codePizza + " supprimée");
+		LOG.debug("\nPizza " + codePizza + " supprimée");
 
 	}
 
 	@Override
 	public String getLibelle() {
-		// TODO Auto-generated method stub
 		return "\n 4. Supprimer une pizza";
 	}
 

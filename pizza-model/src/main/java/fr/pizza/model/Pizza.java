@@ -1,10 +1,6 @@
 package fr.pizza.model;
 
-import java.lang.reflect.Field;
-import java.util.Scanner;
-
 public class Pizza {
-	private int id;
 	@ToString(upperCase = true)
 	private String code;
 	@ToString
@@ -13,8 +9,6 @@ public class Pizza {
 	private double prix;
 	@ToString
 	private CategoriePizza categorie;
-
-	public static Scanner question = new Scanner(System.in);
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
@@ -26,31 +20,8 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		String returned = "";
-		Class<?> classe = this.getClass();
-		for (Field field : classe.getDeclaredFields()) {
-			if (field.isAnnotationPresent(ToString.class)) {
-				try {
-					if (field.getAnnotation(ToString.class).upperCase()) {
-
-						returned += ((String) field.get(this)).toUpperCase() + " -> ";
-
-					} else {
-						if (field.getAnnotation(ToString.class).euro()) {
-							returned += "("+field.get(this) + "€) ";
-
-						} else {
-							returned += field.get(this) + " ";
-						}
-					}
-
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return returned;
-
+		
+		return StringUtils.convert(this);
 	}
 
 	/**

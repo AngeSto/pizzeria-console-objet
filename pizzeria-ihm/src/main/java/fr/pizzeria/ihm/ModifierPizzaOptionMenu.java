@@ -2,6 +2,9 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
@@ -9,19 +12,15 @@ import fr.pizza.model.CategoriePizza;
 import fr.pizza.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
-	
+	private static final Logger LOG = LoggerFactory.getLogger(ModifierPizzaOptionMenu.class);
 	public ModifierPizzaOptionMenu (IPizzaDao dao) {
 		super(dao);
 	}
 
-	public void execute(Scanner question) throws UpdatePizzaException, StockageException {
-		// TODO Auto-generated method stub
+	public void execute(Scanner question) throws StockageException {
 		boolean trouve = false;
-		for (Pizza i : dao.findAllPizzas()) {
-			System.out.println(i);
-				
-		}
-		System.out.println("\nVeuillez choisir la pizza à modifier \n(99 pour abandonner)");
+		afficherAllPizzas();
+		LOG.info("\nVeuillez choisir la pizza à modifier \n(99 pour abandonner)");
 		String codeAModifier = question.nextLine();
 		if (("99").equals(codeAModifier)) {
 			return;
@@ -31,23 +30,23 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		for (Pizza i : dao.findAllPizzas()) {
 			if (i.getCode().equals(codeAModifier)) {
 				trouve = true;
-				System.out.println("Veuillez saisir le code de la pizza");
+				LOG.info("Veuillez saisir le code de la pizza");
 				String code = question.nextLine();
 				if (code.length()<3){
 					throw new UpdatePizzaException("Le code pizza doit être d'au moins 3 caractères");
 				}
-				System.out.println("Veuillez saisir le nom (sans espace svp) de la pizza");
+				LOG.info("Veuillez saisir le nom (sans espace svp) de la pizza");
 				String nom = question.nextLine();
-				System.out.println("Veuillez saisir le prix de la pizza");
+				LOG.info("Veuillez saisir le prix de la pizza");
 				String prixStr = question.nextLine();
 				double prix = Double.parseDouble(prixStr);
-				System.out.println("Veuillez choisir une catégorie (Viande, Sans Viande ou Poisson)");
+				LOG.info("Veuillez choisir une catégorie (Viande, Sans Viande ou Poisson)");
 				String scategorie = question.nextLine();
 				CategoriePizza returncategorie = CategoriePizza.sameLibelle(scategorie);
 				dao.updatePizza(codeAModifier, code, nom, prix, returncategorie);
 				
 				
-				System.out.println("\nPizza "+codeAModifier+" modifiée");
+				LOG.debug("\nPizza "+codeAModifier+" modifiée");
 			}
 				
 			
@@ -59,7 +58,6 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		// TODO Auto-generated method stub
 		return "\n 3. Mettre à jour une pizza";
 	}
 
