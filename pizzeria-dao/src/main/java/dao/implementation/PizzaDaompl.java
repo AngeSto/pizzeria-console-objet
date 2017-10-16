@@ -1,4 +1,4 @@
-package dao;
+package dao.implementation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,10 +12,10 @@ import fr.pizza.model.Pizza;
 public class PizzaDaompl implements IPizzaDao {
 
 	private List<Pizza> listpizzas = new ArrayList<>();
+	private Pizza[] pizzas = new Pizza[8];
 
 	public PizzaDaompl() {
 		// Création de la carte à pizza selon un tableau
-		Pizza[] pizzas = new Pizza[8];
 		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE);
 		pizzas[2] = new Pizza("REIN", "La Reine", 11.50, CategoriePizza.VIANDE);
@@ -87,6 +87,15 @@ public class PizzaDaompl implements IPizzaDao {
 
 		return false;
 
+	}
+
+	@Override
+	public boolean initiatePizza() {
+		listpizzas.clear();
+		for (int i = 0; i < pizzas.length; i++) {
+			listpizzas.add(pizzas[i]);
+		}	
+		return false;
 	}
 
 }

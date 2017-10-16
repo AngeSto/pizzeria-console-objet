@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dao.IPizzaDao;
+import dao.implementation.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizza.model.Pizza;
 

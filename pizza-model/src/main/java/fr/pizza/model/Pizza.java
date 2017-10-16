@@ -1,6 +1,7 @@
 package fr.pizza.model;
 
 public class Pizza {
+	private int id;
 	@ToString(upperCase = true)
 	private String code;
 	@ToString
@@ -20,8 +21,23 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		
+
 		return StringUtils.convert(this);
+	}
+
+
+	/**
+	 * @return id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**

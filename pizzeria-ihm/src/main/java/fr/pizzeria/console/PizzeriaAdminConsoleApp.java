@@ -8,9 +8,11 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dao.IPizzaDao;
-import dao.PizzaDaompl;
+import dao.implementation.IPizzaDao;
+import dao.implementation.PizzaDaompl;
+import dao.jdbc.IPizzaDaoJDBC;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.InitialiserPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.OptionMenu;
@@ -21,12 +23,13 @@ public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		
-		IPizzaDao dao = new PizzaDaompl();
+		IPizzaDao dao = new IPizzaDaoJDBC();
 		Map<String, OptionMenu> optionMenus = new HashMap<>();
 		optionMenus.put("1", new ListerPizzasOptionMenu(dao));
 		optionMenus.put("2", new AjouterPizzaOptionMenu(dao));
 		optionMenus.put("3", new ModifierPizzaOptionMenu(dao));
 		optionMenus.put("4", new SupprimerPizzaOptionMenu(dao));
+		optionMenus.put("5", new InitialiserPizzaOptionMenu(dao));
 		// Annonce la variable "choix" avant do while sinon erreur
 		String choix = "";
 		// Boucle do pour revenir au menu à chaque fois, seul moyen d'en sortir
@@ -35,7 +38,7 @@ public class PizzeriaAdminConsoleApp {
 		do {
 			try {
 				LOG.info("\n*****Pizzeria Administration*****" + optionMenus.get("1").getLibelle() +optionMenus.get("2").getLibelle()
-						+ optionMenus.get("3").getLibelle() + optionMenus.get("4").getLibelle() + "\n 99. Sortir");
+						+ optionMenus.get("3").getLibelle() + optionMenus.get("4").getLibelle() + optionMenus.get("5").getLibelle() + "\n 99. Sortir");
 				Scanner question = new Scanner(System.in);
 				question.useLocale(Locale.US);
 				choix = question.nextLine();

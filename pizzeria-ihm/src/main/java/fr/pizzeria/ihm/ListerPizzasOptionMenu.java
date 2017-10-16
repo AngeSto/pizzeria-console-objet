@@ -1,7 +1,8 @@
 package fr.pizzeria.ihm;
 
 import java.util.Scanner;
-import dao.IPizzaDao;
+
+import dao.implementation.IPizzaDao;
 
 public class ListerPizzasOptionMenu extends OptionMenu {
 
