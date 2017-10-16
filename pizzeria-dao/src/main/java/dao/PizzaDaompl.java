@@ -11,7 +11,7 @@ import fr.pizza.model.Pizza;
 
 public class PizzaDaompl implements IPizzaDao {
 
-	public List<Pizza> listpizzas = new ArrayList<>();
+	private List<Pizza> listpizzas = new ArrayList<>();
 
 	public PizzaDaompl() {
 		// Création de la carte à pizza selon un tableau
