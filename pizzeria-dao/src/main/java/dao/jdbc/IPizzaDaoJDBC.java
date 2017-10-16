@@ -2,6 +2,7 @@ package dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,7 +16,6 @@ import fr.pizza.model.CategoriePizza;
 import fr.pizza.model.Pizza;
 import fr.pizza.model.StringUtils;
 import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 
 public class IPizzaDaoJDBC implements IPizzaDao {
@@ -94,17 +94,20 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 	@Override
 	public boolean saveNewPizza(String code, String nom, Double prix, CategoriePizza returncategorie) {
 		Connection myConnection = getConnection();
-		Statement statement = null;
+		PreparedStatement newStatement = null;
 		try {
-			statement = myConnection.createStatement();
-			String values = StringUtils.concat("('", code, "','", nom, "','", prix, "','", returncategorie, "')");
-			statement.executeUpdate("INSERT INTO PIZZA(CODE, NOM, PRIX, CATEGORIE) VALUES" + values);
+			newStatement = myConnection.prepareStatement("INSERT INTO PIZZA(CODE, NOM, PRIX, CATEGORIE) VALUES(?, ?, ?, ?)");
+			newStatement.setString(1, code);
+			newStatement.setString(2, nom);
+			newStatement.setDouble(3, prix);
+			newStatement.setString(4, returncategorie.toString());
+			newStatement.executeUpdate();
 		} catch (SQLException e) {
 			LOG.error(e.getMessage());
 		} finally {
 			try {
-				if (statement != null) {
-					statement.close();
+				if (newStatement != null) {
+					newStatement.close();
 				}
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());
@@ -123,18 +126,21 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 	public boolean updatePizza(String codeAModifier, String code, String nom, Double prix,
 		CategoriePizza returncategorie) throws UpdatePizzaException {
 		Connection myConnection = getConnection();
-		Statement statement = null;
+		PreparedStatement updateStatement = null;
 		try {
-			statement = myConnection.createStatement();
-			String concat = StringUtils.concat("'", code, "', NOM = '", nom, "', PRIX = '", prix, "', CATEGORIE = '",
-					returncategorie, "' WHERE PIZZA.CODE = '", codeAModifier, "'");
-			statement.executeUpdate("UPDATE PIZZA SET CODE =" + concat);
+			updateStatement = myConnection.prepareStatement("UPDATE PIZZA SET CODE = ?, NOM = ?, PRIX = ?, CATEGORIE = ? WHERE PIZZA.CODE = ?");
+			updateStatement.setString(1, code);
+			updateStatement.setString(2, nom);
+			updateStatement.setDouble(3, prix);
+			updateStatement.setString(4, returncategorie.toString());
+			updateStatement.setString(5, codeAModifier);
+			updateStatement.executeUpdate();
 		} catch (SQLException e) {
 			LOG.error(e.getMessage());
 		} finally {
 			try {
-				if (statement != null) {
-					statement.close();
+				if (updateStatement != null) {
+					updateStatement.close();
 				}
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());

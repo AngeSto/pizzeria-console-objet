@@ -4,7 +4,6 @@ import java.util.List;
 
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizza.model.CategoriePizza;
 import fr.pizza.model.Pizza;
