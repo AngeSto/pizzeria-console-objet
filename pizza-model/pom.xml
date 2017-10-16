@@ -4,8 +4,8 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>pizza</groupId>
-		<artifactId>pizzeria-multimodules</artifactId>
+		<groupId>dta</groupId>
+		<artifactId>pizzeria-multimodules-ange-stoianov</artifactId>
 		<version>0.0.1</version>
 	</parent>
 	<artifactId>pizza-model</artifactId>
