@@ -18,14 +18,14 @@ import fr.pizza.model.StringUtils;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 
-public class IPizzaDaoJDBC implements IPizzaDao {
-	private static final Logger LOG = LoggerFactory.getLogger(IPizzaDaoJDBC.class);
+public class PizzaDaoJDBC implements IPizzaDao {
+	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJDBC.class);
 
-	public IPizzaDaoJDBC() {
+	public PizzaDaoJDBC() {
 		try {
 			Class.forName(ResourceBundle.getBundle("jdbc").getString("jdbc.driverClassName"));
 		} catch (ClassNotFoundException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage(),e);
 		}
 	}
 
@@ -36,7 +36,7 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 					ResourceBundle.getBundle("jdbc").getString("jdbc.username"),
 					ResourceBundle.getBundle("jdbc").getString("jdbc.password"));
 		} catch (SQLException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage(),e);
 		}
 		if (connect != null) {
 			return connect;
@@ -65,26 +65,26 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 			}
 
 		} catch (SQLException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage(),e);
 		} finally {
 			try {
 				if (resultats != null) {
 					resultats.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 			try {
 				myConnection.close();
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 			try {
 				if (statement != null) {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 		}
 
@@ -103,19 +103,19 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 			newStatement.setString(4, returncategorie.toString());
 			newStatement.executeUpdate();
 		} catch (SQLException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage(),e);
 		} finally {
 			try {
 				if (newStatement != null) {
 					newStatement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 			try {
 				myConnection.close();
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 		}
 
@@ -143,12 +143,12 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 					updateStatement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 			try {
 				myConnection.close();
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 		}
 		return false;
@@ -163,19 +163,19 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 			String concat = StringUtils.concat("'",codePizza,"'");
 			statement.executeUpdate("DELETE FROM PIZZA WHERE PIZZA.CODE ="+concat);
 		} catch (SQLException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage(),e);
 		} finally {
 			try {
 				if (statement != null) {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 			try {
 				myConnection.close();
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 		}
 		return false;
@@ -199,19 +199,19 @@ public class IPizzaDaoJDBC implements IPizzaDao {
 					+ "('8', 'IND', 'L\\'Indienne', '14.00', 'Viande')");
 
 		} catch (SQLException e) {
-			LOG.error(e.getMessage());
+			LOG.error(e.getMessage(),e);
 		} finally {
 			try {
 				if (statement != null) {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 			try {
 				myConnection.close();
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(),e);
 			}
 		}
 

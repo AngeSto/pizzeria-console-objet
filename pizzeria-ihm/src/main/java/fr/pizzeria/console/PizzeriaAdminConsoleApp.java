@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dao.implementation.IPizzaDao;
-import dao.implementation.PizzaDaompl;
-import dao.jdbc.IPizzaDaoJDBC;
+import dao.jdbc.PizzaDaoJDBC;
+import dao.jpa.PizzaDaoJPA;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.InitialiserPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
@@ -23,7 +23,7 @@ public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		
-		IPizzaDao dao = new IPizzaDaoJDBC();
+		IPizzaDao dao = new PizzaDaoJPA();
 		Map<String, OptionMenu> optionMenus = new HashMap<>();
 		optionMenus.put("1", new ListerPizzasOptionMenu(dao));
 		optionMenus.put("2", new AjouterPizzaOptionMenu(dao));
@@ -44,12 +44,12 @@ public class PizzeriaAdminConsoleApp {
 				choix = question.nextLine();
 				
 				if(optionMenus.get(choix)!=null){
-				optionMenus.get(choix).execute(question);
+					optionMenus.get(choix).execute(question);
 				}
 				
 
 			} catch (Exception e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 
 		} while (!("99").equals(choix));

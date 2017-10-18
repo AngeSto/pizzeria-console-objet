@@ -10,7 +10,7 @@ import fr.pizza.model.Pizza;
 import fr.pizzeria.exception.StockageException;
 
 public abstract class OptionMenu {
-	protected static final Logger LOG = LoggerFactory.getLogger(OptionMenu.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OptionMenu.class);
 	public abstract void execute(Scanner question) throws StockageException;
 	public abstract String getLibelle();
 	protected IPizzaDao dao;

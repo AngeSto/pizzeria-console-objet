@@ -1,14 +1,29 @@
 package fr.pizza.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="pizza")
 public class Pizza {
-	private int id;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name="Code")
 	@ToString(upperCase = true)
 	private String code;
+	
+	@Column(name="Nom")
 	@ToString
 	private String nom;
+	
+	@Column(name="prix")
 	@ToString(euro = true)
 	private double prix;
-	@ToString
+	
+	@Column(name="Categorie")
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
@@ -17,6 +32,9 @@ public class Pizza {
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = categorie;
+	}
+	public Pizza(){
+		
 	}
 
 	@Override
@@ -29,14 +47,14 @@ public class Pizza {
 	/**
 	 * @return id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -31,10 +31,10 @@ public class StringUtils {
 					} else {
 						if (field.getAnnotation(ToString.class).euro()) {
 
-							builder.append(StringUtils.concat("(", field.get(o), "€) "));
+							builder.append(StringUtils.concat(" (", field.get(o), "€) "));
 
 						} else {
-							builder.append(StringUtils.concat(field.get(o), " "));
+							builder.append(StringUtils.concat(field.get(o)));
 						}
 					}
 
