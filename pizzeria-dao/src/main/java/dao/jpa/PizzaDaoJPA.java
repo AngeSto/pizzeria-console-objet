@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.springframework.stereotype.Service;
+
 import dao.implementation.IPizzaDao;
 import fr.pizza.model.CategoriePizza;
 import fr.pizza.model.Pizza;
@@ -14,8 +16,9 @@ import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 
+@Service
 public class PizzaDaoJPA implements IPizzaDao {
-	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("toto");
+	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pizzeria");
 
 	@Override
 	public List<Pizza> findAllPizzas() {

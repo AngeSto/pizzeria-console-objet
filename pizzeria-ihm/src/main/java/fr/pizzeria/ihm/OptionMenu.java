@@ -4,19 +4,18 @@ import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.implementation.IPizzaDao;
 import fr.pizza.model.Pizza;
 import fr.pizzeria.exception.StockageException;
 
 public abstract class OptionMenu {
-	private static final Logger LOG = LoggerFactory.getLogger(OptionMenu.class);
-	public abstract void execute(Scanner question) throws StockageException;
+	@Autowired protected Logger LOG;
+	public abstract void execute(Scanner scanner) throws StockageException;
 	public abstract String getLibelle();
-	protected IPizzaDao dao;
-	public OptionMenu(IPizzaDao dao){
-		this.dao = dao;
-	}
+	@Autowired protected IPizzaDao dao;
+	
 	public void afficherAllPizzas(){
 		for (Pizza i : dao.findAllPizzas()) {
 			LOG.info(i.toString());

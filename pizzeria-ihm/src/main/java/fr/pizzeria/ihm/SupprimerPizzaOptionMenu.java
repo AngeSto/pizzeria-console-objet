@@ -4,23 +4,19 @@ import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import dao.implementation.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizza.model.Pizza;
 
+@Controller
 public class SupprimerPizzaOptionMenu extends OptionMenu {
-	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
-	Pizza[] pizzas;
 
-	public SupprimerPizzaOptionMenu(IPizzaDao dao) {
-		super(dao);
-	}
-
-	public void execute(Scanner question) throws DeletePizzaException {
+	public void execute(Scanner scanner) throws DeletePizzaException {
 		afficherAllPizzas();
 		LOG.info("\nVeuillez choisir la pizza à supprimer \n(99 pour abandonner)");
-		String codePizza = question.nextLine();
+		String codePizza = scanner.next();
 		if (("99").equals(codePizza)) {
 			return;
 		}
@@ -35,7 +31,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		return "\n 4. Supprimer une pizza";
+		return "Supprimer une pizza";
 	}
 
 }

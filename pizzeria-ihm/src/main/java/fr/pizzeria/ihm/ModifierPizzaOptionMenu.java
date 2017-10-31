@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import dao.implementation.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
@@ -11,17 +12,14 @@ import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizza.model.CategoriePizza;
 import fr.pizza.model.Pizza;
 
+@Controller
 public class ModifierPizzaOptionMenu extends OptionMenu {
-	private static final Logger LOG = LoggerFactory.getLogger(ModifierPizzaOptionMenu.class);
-	public ModifierPizzaOptionMenu (IPizzaDao dao) {
-		super(dao);
-	}
 
-	public void execute(Scanner question) throws StockageException {
+	public void execute(Scanner scanner) throws StockageException {
 		boolean trouve = false;
 		afficherAllPizzas();
 		LOG.info("\nVeuillez choisir la pizza à modifier \n(99 pour abandonner)");
-		String codeAModifier = question.nextLine();
+		String codeAModifier = scanner.nextLine();
 		if (("99").equals(codeAModifier)) {
 			return;
 		}
@@ -31,17 +29,17 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			if (i.getCode().equals(codeAModifier)) {
 				trouve = true;
 				LOG.info("Veuillez saisir le code de la pizza");
-				String code = question.nextLine();
+				String code = scanner.next();
 				if (code.length()<3){
 					throw new UpdatePizzaException("Le code pizza doit être d'au moins 3 caractères");
 				}
 				LOG.info("Veuillez saisir le nom (sans espace svp) de la pizza");
-				String nom = question.nextLine();
+				String nom = scanner.next();
 				LOG.info("Veuillez saisir le prix de la pizza");
-				String prixStr = question.nextLine();
+				String prixStr = scanner.next();
 				double prix = Double.parseDouble(prixStr);
 				LOG.info("Veuillez choisir une catégorie (Viande, Sans Viande ou Poisson)");
-				String scategorie = question.nextLine();
+				String scategorie = scanner.next();
 				CategoriePizza returncategorie = CategoriePizza.sameLibelle(scategorie);
 				dao.updatePizza(codeAModifier, code, nom, prix, returncategorie);
 				
@@ -58,7 +56,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		return "\n 3. Mettre à jour une pizza";
+		return "Mettre à jour une pizza";
 	}
 
 }

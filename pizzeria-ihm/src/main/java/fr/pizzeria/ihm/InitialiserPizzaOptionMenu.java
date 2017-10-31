@@ -4,18 +4,16 @@ import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import dao.implementation.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
+@Controller
 public class InitialiserPizzaOptionMenu extends OptionMenu{
-	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
-	public InitialiserPizzaOptionMenu(IPizzaDao dao) {
-		super(dao);
-	}
 
 	@Override
-	public void execute(Scanner question) throws StockageException {
+	public void execute(Scanner scanner) throws StockageException {
 		
 		dao.initiatePizza();
 		
@@ -25,7 +23,7 @@ public class InitialiserPizzaOptionMenu extends OptionMenu{
 	@Override
 	public String getLibelle() {
 		
-		return "\n 5. Initialiser le tableau de pizza";
+		return "Initialiser le tableau de pizza";
 	}
 
 }

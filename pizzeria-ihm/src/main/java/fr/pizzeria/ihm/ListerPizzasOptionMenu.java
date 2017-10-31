@@ -2,15 +2,15 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
+import org.springframework.stereotype.Controller;
+
 import dao.implementation.IPizzaDao;
 
+@Controller
 public class ListerPizzasOptionMenu extends OptionMenu {
 
-	public ListerPizzasOptionMenu(IPizzaDao dao) {
-		super(dao);
-	}
 
-	public void execute(Scanner question) {
+	public void execute(Scanner scanner) {
 		// Affiche la carte
 		afficherAllPizzas();
 
@@ -18,7 +18,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		return "\n 1. Lister les pizzas";
+		return "Lister les pizzas";
 	}
 
 }
